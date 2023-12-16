@@ -11,9 +11,7 @@ var host = Host
   {
       services.AddInMemoryOutbox();
       services.AddScoped<OutboxTestApp>();
-
   })
-  //.UseOutbox()
   .UseConsoleLifetime()
   .Build();
 

@@ -76,13 +76,13 @@ namespace Shared.Outbox
                 }
                 catch (Exception ex)
                 {
-                    //_logger.LogInformation(ex, "Processing of message failed: {@message}, exception: {exception}", message, ex.Message);
+                    _logger.LogInformation(ex, "Processing of message failed: {@message}, exception: {exception}", message, ex.Message);
                     return message.OnException(ex, retryAttempts, scopedServices);
                 }
             }
             catch (Exception ex)
             {
-                //_logger.LogError(ex, "Unhandled exception while processing outbox message: {@message}, exception: {exception}. Processing will not be retried!", message, ex.Message);
+                _logger.LogError(ex, "Unhandled exception while processing outbox message: {@message}, exception: {exception}. Processing will not be retried!", message, ex.Message);
                 return HandlingResult.FailureNoRetry(ex);
             }
         }

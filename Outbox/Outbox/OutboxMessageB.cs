@@ -36,6 +36,11 @@ namespace Outbox
 
             //logger.LogError("Processing {messageType} failed with text value: {input}, retryCount: {retryCount}, exception: {message}", MessageType, Input, retryCount, exception.Message);
 
+            if (retryCount > 3)
+            {
+                throw new Exception();
+            }
+
             return retryCount > 10
                 ? HandlingResult.FailureNoRetry()
                 : HandlingResult.Retry(exception, TimeSpan.FromSeconds(retryCount * retryCount));
